@@ -1,0 +1,6 @@
+apiVersion: v2
+name: my-helm-app
+description: A GitOps Demo Application for Multi-Cluster Karmada
+type: application
+version: 0.1.0
+appVersion: "1.23.0"

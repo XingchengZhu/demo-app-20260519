@@ -1,0 +1,22 @@
+# 副本数
+replicaCount: 2
+
+# 镜像配置
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "1.23.0"
+
+# 服务端口
+service:
+  type: ClusterIP
+  port: 80
+
+# 资源限制
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 50m
+    memory: 64Mi
