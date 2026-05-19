@@ -1,0 +1,17 @@
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  name: {{ include "my-helm-app.fullname" . }}-propagation
+  namespace: {{ .Release.Namespace }}
+spec:
+  resourceSelectors:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: {{ include "my-helm-app.fullname" . }}
+    - apiVersion: v1
+      kind: Service
+      name: {{ include "my-helm-app.fullname" . }}
+  placement:
+    clusterAffinity:
+      clusterNames:
+        - local-cluster  # 匹配 129 和 131 各自纳管的本地集群
