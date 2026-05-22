@@ -1,19 +1,18 @@
 apiVersion: policy.karmada.io/v1alpha1
 kind: PropagationPolicy
 metadata:
-  name: demo-nginx-propagation
+  name: demo-nginx-pp
   namespace: {{ .Release.Namespace }}
 spec:
-  # 资源筛选器：告诉 Karmada 需要分发哪些资源
   resourceSelectors:
     - apiVersion: apps/v1
       kind: Deployment
-      name: demo-nginx
+      name: {{ include "my-helm-app.fullname" . }}
     - apiVersion: v1
       kind: Service
-      name: demo-nginx-svc
-  # 调度策略：统一推送到名为 local-cluster 的集群
+      name: {{ include "my-helm-app.fullname" . }}
   placement:
     clusterAffinity:
       clusterNames:
-        - local-cluster
+        - pj-cluster
+        - zp-cluster
